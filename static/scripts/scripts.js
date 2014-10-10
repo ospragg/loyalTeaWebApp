@@ -1,6 +1,6 @@
-var source_url = "http://localhost:8080";
+//var source_url = "http://localhost:8080";
 //var source_url = "http://idoenjoyanicecupoftea.appspot.com";
-//var source_url = "";
+var source_url = "";
 var header_dim = "width:320px"
 
 var header = document.getElementById("header");
