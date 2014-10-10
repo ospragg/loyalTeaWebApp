@@ -5,14 +5,21 @@ import os
 import boilerplate
 
 import google.appengine.api.images
+from google.appengine.ext import ndb
 import logging
 
-
+class ImageModel(ndb.Model):
+  key_name = ndb.StringProperty()
+  path = nsb.StringProperty()
 
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
     logging.info("MainHandler")
     self.render("index.html")
+
+class FirstTimeHandler(boilerplate.BlogHandler):
+  def get(self):
+    pass
 
 class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
   def get(self, UUID, stampID):
@@ -28,5 +35,6 @@ class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
 
 application = webapp2.WSGIApplication(
   [('/', MainHandler),
-  ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL)
+   ('/first_time_setup', FirstTimeHandler),
+   ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL)
   ], debug=True)
