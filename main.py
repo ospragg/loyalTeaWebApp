@@ -9,17 +9,18 @@ from google.appengine.ext import ndb
 import logging
 
 class ImageModel(ndb.Model):
-  key_name = ndb.StringProperty()
   path = ndb.StringProperty()
 
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
     logging.info("MainHandler")
+    header_key = ndb.Key(ImageModel, "header")
+    print header_key.get().path
     self.render("index.html")
 
 class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
-    header_entitity = ImageModel(key_name="header", path="/static/images/header.jpg")
+    header_entitity = ImageModel(id="header", path="/static/images/header.jpg")
     header_entitity.put()
 
 class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):

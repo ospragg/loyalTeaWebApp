@@ -80,7 +80,7 @@ function stampRecorded() {
 // initialise page
 function initialise() {
     checkForUUID();
-    loadHeader();
+    //loadHeader();
     loadCafeTable();
 }
 
