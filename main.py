@@ -10,7 +10,7 @@ import logging
 
 class ImageModel(ndb.Model):
   key_name = ndb.StringProperty()
-  path = nsb.StringProperty()
+  path = ndb.StringProperty()
 
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
@@ -19,7 +19,8 @@ class MainHandler(boilerplate.BlogHandler):
 
 class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
-    pass
+    header_entitity = ImageModel(key_name="header", path="/static/images/header.jpg")
+    header_entitity.put()
 
 class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
   def get(self, UUID, stampID):
