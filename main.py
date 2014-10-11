@@ -14,19 +14,24 @@ class MainHandler(boilerplate.BlogHandler):
     logging.info("MainHandler")
     self.render("index.html")
 
-class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
+class requestCardHTMLForUUIDAndStampID(boilerplate.BlogHandler):
   def get(self, UUID, stampID):
-    logging.info("pageStamped, UUID = " + UUID + ", stampID = " + stampID)
+    logging.info("requesting card HTML, UUID = " + UUID + ", stampID = " + stampID)
     self.response.write("<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>")
-    #self.redirect("<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>")
-    #self.redirect("<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>")
-    #self.redirect("/static/images/Cafe_data/dose_espresso/6.jpg")
-    #self.redirect("http://idoenjoyanicecupoftea.appspot.com/static/images/Cafe_data/dose_espresso/6.jpg")
-    #self.redirect("http://localhost:8080/static/images/Cafe_data/dose_espresso/6.jpg")
-    #self.redirect("http://idoenjoyanicecupoftea.appspot.com/static/images/Cafe_data/dose_espresso/6.jpg")
 
+class requestCafeTableHTMLForUUID(boilerplate.BlogHandler):
+  def get(self, UUID):
+    logging.info("requesting cafe table HTML, UUID = " + UUID)
+    self.response.write("<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg' style = 'width:320px'><br>")
+    
+class requestHeaderHTMLForUUID(boilerplate.BlogHandler):
+  def get(self, UUID):
+    logging.info("requesting header HTML, UUID = " + UUID)
+    self.response.write("<img src = '" + "/static/images/header.jpg" + "' style = '" + "width:320px" + "'>")
 
 application = webapp2.WSGIApplication(
   [('/', MainHandler),
-  ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL)
+  ('/requestCardHTMLForUUIDAndStampID/(.*)/(.*)', requestCardHTMLForUUIDAndStampID),
+  ('/requestCafeTableHTMLForUUID/(.*)', requestCafeTableHTMLForUUID),
+  ('/requestHeaderHTMLForUUID/(.*)', requestHeaderHTMLForUUID)
   ], debug=True)

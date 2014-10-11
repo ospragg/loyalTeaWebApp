@@ -1,7 +1,6 @@
 //var source_url = "http://localhost:8080";
 //var source_url = "http://idoenjoyanicecupoftea.appspot.com";
 var source_url = "";
-var header_dim = "width:320px"
 
 var header = document.getElementById("header");
 var cafeTable = document.getElementById("cafeTable");
@@ -35,46 +34,33 @@ function checkForUUID() {
     }
 }
 // reset the UUID
-function resetUUID() {localStorage.removeItem("UUID");}
-// load the header image
-function loadHeader() {
-    var img_url = source_url + "/static/images/header.jpg";
-    header.innerHTML = "<img src = '"
-    + img_url
-    + "' style = '"
-    + header_dim
-    + "'>";
-}
-// load the cafe table
-function loadCafeTable() {
-    var string = "";
-    for (i = 0; i < 1; i++) {
-        string = string + "<img src = '" + source_url + "/static/images/Cafe_data/dose_espresso/0_cell.jpg' style = 'width:320px'><br>";
-    }
-    cafeTable.innerHTML = string;
+function resetUUID() {
+    localStorage.removeItem("UUID");
 }
 
-function stampRecorded() {
-    var request_url = source_url
-    + "/pageStampedRedirectToCardImageURL/"
-    + localStorage.getItem("UUID")
-    + "/"
-    + "217";
+// function to request HTML content from back end
+function requestHTML(request) {
+    var request_url = source_url + request;
 
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", request_url, false );
     xmlHttp.send( null );
 
-    //debug.innerHTML = xmlHttp.responseText;
-    /*
-    header.innerHTML = "<img src = '"
-    + img_url
-    + "' style = '"
-    + header_dim
-    + "'>";
-    */
-    header.innerHTML = xmlHttp.responseText;
+    return xmlHttp.responseText;
+}
+
+// load the header image
+function loadHeader() {
+    header.innerHTML = requestHTML("/requestHeaderHTMLForUUID/" + localStorage.getItem("UUID"));
+}
+// load the cafe table
+function loadCafeTable() {
+    cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
+}
+
+function stampRecorded() {
+    header.innerHTML = requestHTML("/requestCardHTMLForUUIDAndStampID/" + localStorage.getItem("UUID") + "/" + "217");
 }
 
 // initialise page

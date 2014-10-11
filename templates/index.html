@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        <!--
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        
         <link rel="stylesheet" type="text/css" href="/static/styles/index.css">
+        -->
+        <link rel = "stylesheet" type = "text/css" href = "/static/styles/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
 
     <body onload = "initialise()">
+        <div id = "container">
+            <div id = "header"></div>
+            <div id = "cafeTable"></div>
 
-        <div id = "header"></div>
-        <div id = "cafeTable"></div>
+<input type="range"  id="a" name="a" value="50">
 
-
-        <br>
+            <br>
     	<button onclick="stampRecorded()">Stamp!</button>
         <br>
     	<p id="debug">DEBUG</p>
 
     	<script src="/static/scripts/scripts.js"></script>
-
+    </div>
     </body>
 </html>
