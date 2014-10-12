@@ -6,6 +6,7 @@ import boilerplate
 
 import google.appengine.api.images
 from google.appengine.ext import ndb
+from google.appengine.ext.webapp import template
 import logging
 
 class ImageModel(ndb.Model):
@@ -15,8 +16,12 @@ class MainHandler(boilerplate.BlogHandler):
   def get(self):
     logging.info("MainHandler")
     header_key = ndb.Key(ImageModel, "header")
-    print header_key.get().path
-    self.render("index.html")
+    header_path = header_key.get().path
+    print header_path
+    template_values = {
+      "header_path": header_path
+    }
+    self.response.out.write(template.render("templates/index.html", template_values))
 
 class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
