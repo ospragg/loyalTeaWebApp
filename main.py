@@ -53,8 +53,11 @@ class StampHandler(boilerplate.BlogHandler):
     cafe_data = user_key.get()
     if cafe_data.cafe_stamps.get(stamp_id, None) is not None:
       cafe_data.cafe_stamps[stamp_id] += 1
+    elif cafe_date.cafe_stamps[stamp_id] > 9:
+      cafe_data.cafe_stamps[stamp_id] = 0
     else:
       cafe_data.cafe_stamps[stamp_id] = 1
+
     cafe_data.put()
 
     num_of_stamps = cafe_data.cafe_stamps[stamp_id]
@@ -83,9 +86,8 @@ class StampHandler(boilerplate.BlogHandler):
     elif num_of_stamps == 9:
       header_path = cafe.stamp_9
     else:
-      header_path = cafe.stamp_0
+      header_path = cafe.stamp_9
 
-    print '<img src="' + header_path + '" >'
     self.response.out.write('<img src="' + header_path + '" >')
 
 class CafeTableHandler(boilerplate.BlogHandler):
