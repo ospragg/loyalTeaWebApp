@@ -68,7 +68,7 @@ function loadCafeTable() {
 function stampRecorded() {
     //header.innerHTML = requestHTML("/requestCardHTMLForUUIDAndStampID/" + localStorage.getItem("UUID") + "/" + "217");
     //header.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg" + "' style = '" + "width:320px" + "'>"
-    requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217")
+    header.innerHTML = requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217")
 }
 
 // initialise page

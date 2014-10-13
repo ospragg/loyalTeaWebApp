@@ -85,11 +85,8 @@ class StampHandler(boilerplate.BlogHandler):
     else:
       header_path = cafe.stamp_0
 
-    template_values = {
-      "header_path": header_path
-    }
-
-    self.response.out.write(template.render("templates/index.html", template_values))
+    print '<img src="' + header_path + '" >'
+    self.response.out.write('<img src="' + header_path + '" >')
 
 class CafeTableHandler(boilerplate.BlogHandler):
   def get(self):
