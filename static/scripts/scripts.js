@@ -1,16 +1,10 @@
-//var source_url = "http://localhost:8080";
-//var source_url = "http://idoenjoyanicecupoftea.appspot.com";
-var source_url = "";
-
 var header = document.getElementById("header");
 var cafeTable = document.getElementById("cafeTable");
 
 var debug = document.getElementById("debug");
 
-
 // get the header image to start listening for touches
 header.addEventListener("touchstart", touchStarted, false);
-
 
 // generate the UUID
 function generateUUID() {
@@ -24,6 +18,7 @@ function generateUUID() {
         );
     return uuid;
 }
+
 // check if a UUID for the browser has beem created, and create one if it hasn't
 function checkForUUID() {
     if (localStorage.getItem("UUID") == null) {
@@ -44,7 +39,7 @@ function resetUUID() {
 
 // function to request HTML content from back end
 function requestHTML(request) {
-    var request_url = source_url + request;
+    var request_url = request;
 
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
@@ -54,27 +49,18 @@ function requestHTML(request) {
     return xmlHttp.responseText;
 }
 
-// load the header image
-function loadHeader() {
-    //header.innerHTML = requestHTML("/requestHeaderHTMLForUUID/" + localStorage.getItem("UUID"));
-    header.innerHTML = "<img src = '" + "/static/images/header.jpg" + "' style = '" + "width:320px" + "'>"
-}
 // load the cafe table
 function loadCafeTable() {
-    //cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
-    requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
-    //cafeTable.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg" + "' style = '" + "width:320px" + "'>"
+    cafeTable.innerHTML = requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
 }
 
 function stampRecorded() {
-    //header.innerHTML = requestHTML("/requestCardHTMLForUUIDAndStampID/" + localStorage.getItem("UUID") + "/" + "217");
-    header.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg" + "' style = '" + "width:320px" + "'>"
+    header.innerHTML = requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217")
 }
 
 // initialise page
 function initialise() {
     checkForUUID();
-    //loadHeader();
     loadCafeTable();
 }
 
