@@ -52,22 +52,22 @@ class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
     header_entitity = ImageModel(id="header", path="/static/images/header.jpg")
     header_entitity.put()
-    register_cafe("dose_espresso")
+    self.register_cafe("dose_espresso")
 
   def register_cafe(self, cafe_name):
     cafe_entity = CafeModel(id=cafe_name,
                             name = cafe_name,
-                            small_image = cafe_image_path(cafe_name, "0_cell"),
-                            stamp_0 = cafe_image_path(cafe_name, "0"),
-                            stamp_1 = cafe_image_path(cafe_name, "1"),
-                            stamp_2 = cafe_image_path(cafe_name, "2"),
-                            stamp_3 = cafe_image_path(cafe_name, "3"),
-                            stamp_4 = cafe_image_path(cafe_name, "4"),
-                            stamp_5 = cafe_image_path(cafe_name, "5"),
-                            stamp_6 = cafe_image_path(cafe_name, "6"),
-                            stamp_7 = cafe_image_path(cafe_name, "7"),
-                            stamp_8 = cafe_image_path(cafe_name, "8"),
-                            stamp_9 = cafe_image_path(cafe_name, "9"),
+                            small_image = self.cafe_image_path(cafe_name, "0_cell"),
+                            stamp_0 = self.cafe_image_path(cafe_name, "0"),
+                            stamp_1 = self.cafe_image_path(cafe_name, "1"),
+                            stamp_2 = self.cafe_image_path(cafe_name, "2"),
+                            stamp_3 = self.cafe_image_path(cafe_name, "3"),
+                            stamp_4 = self.cafe_image_path(cafe_name, "4"),
+                            stamp_5 = self.cafe_image_path(cafe_name, "5"),
+                            stamp_6 = self.cafe_image_path(cafe_name, "6"),
+                            stamp_7 = self.cafe_image_path(cafe_name, "7"),
+                            stamp_8 = self.cafe_image_path(cafe_name, "8"),
+                            stamp_9 = self.cafe_image_path(cafe_name, "9"),
       )
     cafe_entity.put()
 
