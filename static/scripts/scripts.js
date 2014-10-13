@@ -60,15 +60,18 @@ function requestHTML(request) {
 
 // load the header image
 function loadHeader() {
-    header.innerHTML = requestHTML("/requestHeaderHTMLForUUID/" + localStorage.getItem("UUID"));
+    //header.innerHTML = requestHTML("/requestHeaderHTMLForUUID/" + localStorage.getItem("UUID"));
+    header.innerHTML = "<img src = '" + "/static/images/header.jpg" + "' style = '" + "width:320px" + "'>"
 }
 // load the cafe table
 function loadCafeTable() {
-    cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
+    //cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
+    cafeTable.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>"
 }
 
 function stampRecorded() {
-    header.innerHTML = requestHTML("/requestCardHTMLForUUIDAndStampID/" + localStorage.getItem("UUID") + "/" + "217");
+    //header.innerHTML = requestHTML("/requestCardHTMLForUUIDAndStampID/" + localStorage.getItem("UUID") + "/" + "217");
+    header.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg" + "' style = '" + "width:320px" + "'>"
 }
 
 // initialise page

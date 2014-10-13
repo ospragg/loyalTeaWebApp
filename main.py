@@ -42,6 +42,7 @@ class MainHandler(boilerplate.BlogHandler):
     self.render("index.html")
 
 class requestCardHTMLForUUIDAndStampID(boilerplate.BlogHandler):
+  def get(self):
     header_key = ndb.Key(ImageModel, "header")
     header_path = header_key.get().path
 
@@ -50,7 +51,7 @@ class requestCardHTMLForUUIDAndStampID(boilerplate.BlogHandler):
     }
     self.response.out.write(template.render("templates/index.html", template_values))
 
-class CafeTableHandler(boilderplate.BlogHandler):
+class CafeTableHandler(boilerplate.BlogHandler):
   def get(self):
     pass
 
