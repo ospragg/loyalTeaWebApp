@@ -53,10 +53,11 @@ class StampHandler(boilerplate.BlogHandler):
     cafe_data = user_key.get()
     if cafe_data.cafe_stamps.get(stamp_id, None) is not None:
       cafe_data.cafe_stamps[stamp_id] += 1
-    elif cafe_date.cafe_stamps[stamp_id] > 9:
-      cafe_data.cafe_stamps[stamp_id] = 0
     else:
       cafe_data.cafe_stamps[stamp_id] = 1
+
+    if cafe_data.cafe_stamps[stamp_id] > 9:
+      cafe_data.cafe_stamps[stamp_id] = 0
 
     cafe_data.put()
 
