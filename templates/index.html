@@ -12,14 +12,17 @@
 
     <body onload = "initialise()">
         <div id = "container">
-            <div id = "header"></div>
+            <div id = "header">
+                <img src="{{ header_path }}">
+            </div>
             <div id = "cafeTable"></div>
             <br>
+
     	<button onclick="stampRecorded()">Stamp!</button>
         <br>
     	<p id="debug">DEBUG</p>
 
     	<script src="/static/scripts/scripts.js"></script>
-    </div>
+        </div>
     </body>
 </html>

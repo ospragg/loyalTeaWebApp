@@ -28,7 +28,15 @@ function generateUUID() {
 function checkForUUID() {
     if (localStorage.getItem("UUID") == null) {
         debug.innerHTML = "No data saved";
-        localStorage.setItem("UUID", generateUUID());
+        var uuid = generateUUID();
+        localStorage.setItem("UUID", uuid);
+
+        //send that to the server and register them as a new user
+        var request_url = "/new_user?uuid=" + uuid;
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", request_url, false );
+        xmlHttp.send( null );
     } else {
         debug.innerHTML = localStorage.getItem("UUID");
     }
@@ -66,7 +74,7 @@ function stampRecorded() {
 // initialise page
 function initialise() {
     checkForUUID();
-    loadHeader();
+    //loadHeader();
     loadCafeTable();
 }
 
