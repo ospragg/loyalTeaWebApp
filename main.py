@@ -8,8 +8,6 @@ import google.appengine.api.images
 import logging
 
 import data
-users = []
-cafes = []
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 import logging
@@ -96,6 +94,18 @@ class CafeTableHandler(boilerplate.BlogHandler):
     uuid = self.request.get('uuid')
     user_key = ndb.Key(UserModel, uuid)
     cafe_data = user_key.get().cafe_stamps
+    cafe_smalls = []
+
+    for cafe_id in cafe_data.keys():
+      cafe_key = ndb.Key(CafeModel, cafe_id)
+      cafe = cafe_key.get()
+      cafe_smalls.append(cafe.small_image)
+
+    cafe_table = ""
+    for cafe in cafe_smalls:
+      cafe_table += '<img src="' + cafe + '" ><br/>'
+
+    self.response.out.write(cafe_table)
 
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):
@@ -131,34 +141,9 @@ class FirstTimeHandler(boilerplate.BlogHandler):
   def cafe_image_path(self, cafe_name, file_name):
     return "/static/images/Cafe_data/" + cafe_name + "/" + file_name + ".jpg"
 
-class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
-  def get(self, UUID, stampID):
-    logging.info("requesting card HTML, UUID = " + UUID + ", stampID = " + stampID)
-    if any(UUID in data.user.UUID for data.user.UUID in users):
-      logging.info("     UUID = " + UUID + ", i_stamps = " + users[0].active_cafes[0].i_stamps)
-    else:
-      logging.info("matching UUID not found. Adding user:")
-      users.append(data.user(UUID))
-      users.active_cafes.append(stampID in data.cafe.stamp_ID for data.cafe.stamp_ID in cafes)
-      logging.info("   user UUID = " + users[0].UUID)
-    self.response.write("<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>")
-
-class requestCafeTableHTMLForUUID(boilerplate.BlogHandler):
-  def get(self, UUID):
-    logging.info("requesting cafe table HTML, UUID = " + UUID)
-    self.response.write("<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg' style = 'width:320px'><br>")
-
-class requestHeaderHTMLForUUID(boilerplate.BlogHandler):
-  def get(self, UUID):
-    logging.info("requesting header HTML, UUID = " + UUID)
-    self.response.write("<img src = '" + "/static/images/header.jpg" + "' style = '" + "width:320px" + "'>")
-
 application = webapp2.WSGIApplication(
   [('/', MainHandler),
-   ('/requestCafeTableHTMLForUUID/(.*)', requestCafeTableHTMLForUUID),
-   ('/requestHeaderHTMLForUUID/(.*)', requestHeaderHTMLForUUID),
    ('/first_time_setup', FirstTimeHandler),
-   ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL),
    ('/new_user', NewUserHandler),
    ('/cafe_table', CafeTableHandler),
    ('/record_stamp', StampHandler)
