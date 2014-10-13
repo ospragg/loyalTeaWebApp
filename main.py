@@ -34,11 +34,15 @@ class MainHandler(boilerplate.BlogHandler):
     logging.info("MainHandler")
     header_key = ndb.Key(ImageModel, "header")
     header_path = header_key.get().path
-    print header_path
+
     template_values = {
       "header_path": header_path
     }
     self.response.out.write(template.render("templates/index.html", template_values))
+
+class CafeTableHandler(boilderplate.BlogHandler):
+  def get(self):
+    pass
 
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):

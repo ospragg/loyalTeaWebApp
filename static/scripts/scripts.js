@@ -32,6 +32,7 @@ function checkForUUID() {
         var uuid = generateUUID();
         localStorage.setItem("UUID", uuid);
 
+        //send that to the server and register them as a new user
         var request_url = "/new_user?uuid=" + uuid;
         var xmlHttp = null;
         xmlHttp = new XMLHttpRequest();
