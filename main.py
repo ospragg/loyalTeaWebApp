@@ -36,13 +36,6 @@ class CafeModel(ndb.Model):
 
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
-    logging.info("MainHandler")
-    cafes.append(data.cafe("dose espresso", 217, 10, 0))
-    cafes.append(data.cafe("cafe nero", 101, 10, 0))
-    self.render("index.html")
-
-class requestCardHTMLForUUIDAndStampID(boilerplate.BlogHandler):
-  def get(self):
     header_key = ndb.Key(ImageModel, "header")
     header_path = header_key.get().path
 
@@ -53,7 +46,11 @@ class requestCardHTMLForUUIDAndStampID(boilerplate.BlogHandler):
 
 class CafeTableHandler(boilerplate.BlogHandler):
   def get(self):
-    pass
+    uuid = self.request.get('uuid')
+    print uuid
+    user_key = ndb.Key(UserModel, uuid)
+    cafe_data = user_key.get().cafe_stamps
+    print cafe_data
 
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):
@@ -105,7 +102,7 @@ class requestCafeTableHTMLForUUID(boilerplate.BlogHandler):
   def get(self, UUID):
     logging.info("requesting cafe table HTML, UUID = " + UUID)
     self.response.write("<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg' style = 'width:320px'><br>")
-    
+
 class requestHeaderHTMLForUUID(boilerplate.BlogHandler):
   def get(self, UUID):
     logging.info("requesting header HTML, UUID = " + UUID)
@@ -113,10 +110,10 @@ class requestHeaderHTMLForUUID(boilerplate.BlogHandler):
 
 application = webapp2.WSGIApplication(
   [('/', MainHandler),
-   ('/requestCardHTMLForUUIDAndStampID/(.*)/(.*)', requestCardHTMLForUUIDAndStampID),
    ('/requestCafeTableHTMLForUUID/(.*)', requestCafeTableHTMLForUUID),
    ('/requestHeaderHTMLForUUID/(.*)', requestHeaderHTMLForUUID),
    ('/first_time_setup', FirstTimeHandler),
    ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL),
-   ('/new_user', NewUserHandler)
+   ('/new_user', NewUserHandler),
+   ('/cafe_table', CafeTableHandler)
   ], debug=True)

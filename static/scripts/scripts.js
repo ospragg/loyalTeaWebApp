@@ -32,11 +32,7 @@ function checkForUUID() {
         localStorage.setItem("UUID", uuid);
 
         //send that to the server and register them as a new user
-        var request_url = "/new_user?uuid=" + uuid;
-        var xmlHttp = null;
-        xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", request_url, false );
-        xmlHttp.send( null );
+        requestHTML("/new_user?uuid=" + uuid);
     } else {
         debug.innerHTML = localStorage.getItem("UUID");
     }
@@ -66,7 +62,7 @@ function loadHeader() {
 // load the cafe table
 function loadCafeTable() {
     //cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
-    cafeTable.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/6.jpg" + "' style = '" + "width:320px" + "'>"
+    requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
 }
 
 function stampRecorded() {
