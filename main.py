@@ -12,6 +12,23 @@ import logging
 class ImageModel(ndb.Model):
   path = ndb.StringProperty()
 
+class UserModel(ndb.Model):
+  cafe_stamps = ndb.JsonProperty()
+
+class CafeModel(ndb.Model):
+  name = ndb.StringProperty()
+  small_image = ndb.StringProperty()
+  stamp_0 = ndb.StringProperty()
+  stamp_1 = ndb.StringProperty()
+  stamp_2 = ndb.StringProperty()
+  stamp_3 = ndb.StringProperty()
+  stamp_4 = ndb.StringProperty()
+  stamp_5 = ndb.StringProperty()
+  stamp_6 = ndb.StringProperty()
+  stamp_7 = ndb.StringProperty()
+  stamp_8 = ndb.StringProperty()
+  stamp_9 = ndb.StringProperty()
+
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
     logging.info("MainHandler")
@@ -27,6 +44,27 @@ class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
     header_entitity = ImageModel(id="header", path="/static/images/header.jpg")
     header_entitity.put()
+    register_cafe("dose_espresso")
+
+  def register_cafe(self, cafe_name):
+    cafe_entity = CafeModel(id=cafe_name,
+                            name = cafe_name,
+                            small_image = cafe_image_path(cafe_name, "0_cell"),
+                            stamp_0 = cafe_image_path(cafe_name, "0"),
+                            stamp_1 = cafe_image_path(cafe_name, "1"),
+                            stamp_2 = cafe_image_path(cafe_name, "2"),
+                            stamp_3 = cafe_image_path(cafe_name, "3"),
+                            stamp_4 = cafe_image_path(cafe_name, "4"),
+                            stamp_5 = cafe_image_path(cafe_name, "5"),
+                            stamp_6 = cafe_image_path(cafe_name, "6"),
+                            stamp_7 = cafe_image_path(cafe_name, "7"),
+                            stamp_8 = cafe_image_path(cafe_name, "8"),
+                            stamp_9 = cafe_image_path(cafe_name, "9"),
+      )
+    cafe_entity.put()
+
+  def cafe_image_path(self, cafe_name, file_name):
+    return "/static/images/Cafe_data/" + cafe_name + "/" + file_name + ".jpg"
 
 class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
   def get(self, UUID, stampID):
