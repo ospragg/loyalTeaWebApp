@@ -13,6 +13,7 @@ class ImageModel(ndb.Model):
   path = ndb.StringProperty()
 
 class UserModel(ndb.Model):
+  uuid = ndb.StringProperty()
   cafe_stamps = ndb.JsonProperty()
 
 class CafeModel(ndb.Model):
@@ -39,6 +40,11 @@ class MainHandler(boilerplate.BlogHandler):
       "header_path": header_path
     }
     self.response.out.write(template.render("templates/index.html", template_values))
+
+class NewUserHandler(boilerplate.BlogHandler):
+  def get(self):
+    uuid = self.request.get('uuid')
+    print uuid
 
 class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
@@ -81,5 +87,6 @@ class pageStampedRedirectToCardImageURL(boilerplate.BlogHandler):
 application = webapp2.WSGIApplication(
   [('/', MainHandler),
    ('/first_time_setup', FirstTimeHandler),
-   ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL)
+   ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL),
+   ('/new_user', NewUserHandler)
   ], debug=True)

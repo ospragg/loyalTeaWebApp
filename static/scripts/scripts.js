@@ -29,7 +29,14 @@ function generateUUID() {
 function checkForUUID() {
     if (localStorage.getItem("UUID") == null) {
         debug.innerHTML = "No data saved";
-        localStorage.setItem("UUID", generateUUID());
+        var uuid = generateUUID();
+        localStorage.setItem("UUID", uuid);
+
+        var request_url = "/new_user?uuid=" + uuid;
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", request_url, false );
+        xmlHttp.send( null );
     } else {
         debug.innerHTML = localStorage.getItem("UUID");
     }
