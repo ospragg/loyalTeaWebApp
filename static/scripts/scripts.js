@@ -63,6 +63,7 @@ function loadHeader() {
 function loadCafeTable() {
     //cafeTable.innerHTML = requestHTML("/requestCafeTableHTMLForUUID/" + localStorage.getItem("UUID"));
     requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
+    //cafeTable.innerHTML = "<img src = '" + "/static/images/Cafe_data/dose_espresso/0_cell.jpg" + "' style = '" + "width:320px" + "'>"
 }
 
 function stampRecorded() {
