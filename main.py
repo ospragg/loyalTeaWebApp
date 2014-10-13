@@ -22,6 +22,7 @@ class UserModel(ndb.Model):
 
 class CafeModel(ndb.Model):
   name = ndb.StringProperty()
+  stamp_id = ndb.IntegerProperty()
   small_image = ndb.StringProperty()
   stamp_0 = ndb.StringProperty()
   stamp_1 = ndb.StringProperty()
@@ -44,13 +45,57 @@ class MainHandler(boilerplate.BlogHandler):
     }
     self.response.out.write(template.render("templates/index.html", template_values))
 
+class StampHandler(boilerplate.BlogHandler):
+  def get(self):
+    uuid = self.request.get('uuid')
+    stamp_id = self.request.get('stamp_id')
+    user_key = ndb.Key(UserModel, uuid)
+    cafe_data = user_key.get()
+    if cafe_data.cafe_stamps.get(stamp_id, None) is not None:
+      cafe_data.cafe_stamps[stamp_id] += 1
+    else:
+      cafe_data.cafe_stamps[stamp_id] = 1
+    cafe_data.put()
+
+    num_of_stamps = cafe_data.cafe_stamps[stamp_id]
+
+    cafe_key = ndb.Key(CafeModel, stamp_id)
+    cafe = cafe_key.get()
+
+    if num_of_stamps == 0:
+      header_path = cafe.stamp_0
+    elif num_of_stamps == 1:
+      header_path = cafe.stamp_1
+    elif num_of_stamps == 2:
+      header_path = cafe.stamp_2
+    elif num_of_stamps == 3:
+      header_path = cafe.stamp_3
+    elif num_of_stamps == 4:
+      header_path = cafe.stamp_4
+    elif num_of_stamps == 5:
+      header_path = cafe.stamp_5
+    elif num_of_stamps == 6:
+      header_path = cafe.stamp_6
+    elif num_of_stamps == 7:
+      header_path = cafe.stamp_7
+    elif num_of_stamps == 8:
+      header_path = cafe.stamp_8
+    elif num_of_stamps == 9:
+      header_path = cafe.stamp_9
+    else:
+      header_path = cafe.stamp_0
+
+    template_values = {
+      "header_path": header_path
+    }
+
+    self.response.out.write(template.render("templates/index.html", template_values))
+
 class CafeTableHandler(boilerplate.BlogHandler):
   def get(self):
     uuid = self.request.get('uuid')
-    print uuid
     user_key = ndb.Key(UserModel, uuid)
     cafe_data = user_key.get().cafe_stamps
-    print cafe_data
 
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):
@@ -67,7 +112,7 @@ class FirstTimeHandler(boilerplate.BlogHandler):
     self.register_cafe("dose_espresso")
 
   def register_cafe(self, cafe_name):
-    cafe_entity = CafeModel(id=cafe_name,
+    cafe_entity = CafeModel(id="217",
                             name = cafe_name,
                             small_image = self.cafe_image_path(cafe_name, "0_cell"),
                             stamp_0 = self.cafe_image_path(cafe_name, "0"),
@@ -115,5 +160,6 @@ application = webapp2.WSGIApplication(
    ('/first_time_setup', FirstTimeHandler),
    ('/pageStampedRedirectToCardImageURL/(.*)/(.*)', pageStampedRedirectToCardImageURL),
    ('/new_user', NewUserHandler),
-   ('/cafe_table', CafeTableHandler)
+   ('/cafe_table', CafeTableHandler),
+   ('/record_stamp', StampHandler)
   ], debug=True)
