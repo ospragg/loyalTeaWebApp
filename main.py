@@ -13,7 +13,6 @@ class ImageModel(ndb.Model):
   path = ndb.StringProperty()
 
 class UserModel(ndb.Model):
-  uuid = ndb.StringProperty()
   cafe_stamps = ndb.JsonProperty()
 
 class CafeModel(ndb.Model):
@@ -44,7 +43,10 @@ class MainHandler(boilerplate.BlogHandler):
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):
     uuid = self.request.get('uuid')
-    print uuid
+    user_entity = UserModel(id=uuid,
+                            cafe_stamps = {}
+                            )
+    user_entity.put()
 
 class FirstTimeHandler(boilerplate.BlogHandler):
   def get(self):
