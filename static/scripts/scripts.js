@@ -51,7 +51,9 @@ function requestHTML(request) {
 
 // load the cafe table
 function loadCafeTable() {
-    cafeTable.innerHTML = requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
+    document.write(requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")));
+    document.close();
+    //cafeTable.innerHTML = requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"))
 }
 
 function stampRecorded() {
