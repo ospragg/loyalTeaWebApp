@@ -57,7 +57,7 @@ class StampHandler(webapp2.RequestHandler):
     else:
       header_path = cafe.stamp_9
 
-    self.response.out.write('<img src="' + header_path + '" >')
+    self.response.out.write(header_path)
 
 class CafeTableHandler(webapp2.RequestHandler):
 

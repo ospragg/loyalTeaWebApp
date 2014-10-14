@@ -48,8 +48,8 @@ function loadCafeTable() {
 }
 
 function stampRecorded() {
-    $( "#header").html( requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217") );
-    loadCafeTable()
+    $( "img#header" ).attr( "src", requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217") );
+    loadCafeTable();
 }
 
 // initialise page
