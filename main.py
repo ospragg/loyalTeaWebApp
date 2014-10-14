@@ -1,10 +1,9 @@
 import webapp2
-import boilerplate
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 from models.models import ImageModel, UserModel, CafeModel
 
-class MainHandler(boilerplate.BlogHandler):
+class MainHandler(webapp2.RequestHandler):
   def get(self):
     header_key = ndb.Key(ImageModel, "header")
     header_path = header_key.get().path
@@ -14,7 +13,7 @@ class MainHandler(boilerplate.BlogHandler):
     }
     self.response.out.write(template.render("templates/index.html", template_values))
 
-class StampHandler(boilerplate.BlogHandler):
+class StampHandler(webapp2.RequestHandler):
   def get(self):
     uuid = self.request.get('uuid')
     stamp_id = self.request.get('stamp_id')
@@ -60,7 +59,7 @@ class StampHandler(boilerplate.BlogHandler):
 
     self.response.out.write('<img src="' + header_path + '" >')
 
-class CafeTableHandler(boilerplate.BlogHandler):
+class CafeTableHandler(webapp2.RequestHandler):
 
   def get(self):
     uuid = self.request.get('uuid')
@@ -79,7 +78,7 @@ class CafeTableHandler(boilerplate.BlogHandler):
 
     self.response.out.write(template.render("templates/cafe_table.html", template_values))
 
-class NewUserHandler(boilerplate.BlogHandler):
+class NewUserHandler(webapp2.RequestHandler):
   def get(self):
     uuid = self.request.get('uuid')
     user_entity = UserModel(id=uuid,
@@ -87,26 +86,27 @@ class NewUserHandler(boilerplate.BlogHandler):
                             )
     user_entity.put()
 
-class FirstTimeHandler(boilerplate.BlogHandler):
+class FirstTimeHandler(webapp2.RequestHandler):
   def get(self):
     header_entitity = ImageModel(id="header", path="/static/images/header.jpg")
     header_entitity.put()
     self.register_cafe("dose_espresso")
 
   def register_cafe(self, cafe_name):
-    cafe_entity = CafeModel(id="217",
-                            name = cafe_name,
-                            small_image = self.cafe_image_path(cafe_name, "0_cell"),
-                            stamp_0 = self.cafe_image_path(cafe_name, "0"),
-                            stamp_1 = self.cafe_image_path(cafe_name, "1"),
-                            stamp_2 = self.cafe_image_path(cafe_name, "2"),
-                            stamp_3 = self.cafe_image_path(cafe_name, "3"),
-                            stamp_4 = self.cafe_image_path(cafe_name, "4"),
-                            stamp_5 = self.cafe_image_path(cafe_name, "5"),
-                            stamp_6 = self.cafe_image_path(cafe_name, "6"),
-                            stamp_7 = self.cafe_image_path(cafe_name, "7"),
-                            stamp_8 = self.cafe_image_path(cafe_name, "8"),
-                            stamp_9 = self.cafe_image_path(cafe_name, "9"),
+    cafe_entity = CafeModel(
+      id="217",
+      name = cafe_name,
+      small_image = self.cafe_image_path(cafe_name, "0_cell"),
+      stamp_0 = self.cafe_image_path(cafe_name, "0"),
+      stamp_1 = self.cafe_image_path(cafe_name, "1"),
+      stamp_2 = self.cafe_image_path(cafe_name, "2"),
+      stamp_3 = self.cafe_image_path(cafe_name, "3"),
+      stamp_4 = self.cafe_image_path(cafe_name, "4"),
+      stamp_5 = self.cafe_image_path(cafe_name, "5"),
+      stamp_6 = self.cafe_image_path(cafe_name, "6"),
+      stamp_7 = self.cafe_image_path(cafe_name, "7"),
+      stamp_8 = self.cafe_image_path(cafe_name, "8"),
+      stamp_9 = self.cafe_image_path(cafe_name, "9"),
       )
     cafe_entity.put()
 

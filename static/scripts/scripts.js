@@ -1,11 +1,3 @@
-var header = document.getElementById("header");
-var cafeTable = document.getElementById("cafeTable");
-
-var debug = document.getElementById("debug");
-
-// get the header image to start listening for touches
-header.addEventListener("touchstart", touchStarted, false);
-
 // generate the UUID
 function generateUUID() {
     var d = new Date().getTime();
@@ -52,11 +44,12 @@ function requestHTML(request) {
 
 // load the cafe table
 function loadCafeTable() {
-    $( "#cafeTable" ).html( requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")) )
+    $( "#cafeTable" ).html( requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")) );
 }
 
 function stampRecorded() {
-    header.innerHTML = requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217");
+    $( "#header").html( requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217") );
+    loadCafeTable()
 }
 
 // initialise page
