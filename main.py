@@ -61,6 +61,7 @@ class StampHandler(boilerplate.BlogHandler):
     self.response.out.write('<img src="' + header_path + '" >')
 
 class CafeTableHandler(boilerplate.BlogHandler):
+
   def get(self):
     uuid = self.request.get('uuid')
     user_key = ndb.Key(UserModel, uuid)

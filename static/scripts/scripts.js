@@ -32,6 +32,7 @@ function checkForUUID() {
         debug.innerHTML = localStorage.getItem("UUID");
     }
 }
+
 // reset the UUID
 function resetUUID() {
     localStorage.removeItem("UUID");
@@ -51,7 +52,7 @@ function requestHTML(request) {
 
 // load the cafe table
 function loadCafeTable() {
-    cafeTable.innerHTML = requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID"));
+    $( "#cafeTable" ).html( requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")) )
 }
 
 function stampRecorded() {

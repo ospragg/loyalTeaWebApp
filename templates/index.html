@@ -4,6 +4,8 @@
         <link rel="stylesheet" type="text/css" href="/static/styles/index.css">
         <link rel = "stylesheet" type = "text/css" href = "/static/styles/bootstrap.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <script src="/static/scripts/jquery-2.1.1.min.js"></script>
     </head>
 
     <body onload = "initialise()">
@@ -12,15 +14,15 @@
                 <img src="{{ header_path }}" class="img-responsive">
             </div>
             <div id = "cafeTable">
-
             </div>
+
             <br>
+        </div>
 
     	<button onclick="stampRecorded()">Stamp!</button>
         <br>
     	<p id="debug">DEBUG</p>
 
-    	<script src="/static/scripts/scripts.js"></script>
-        </div>
     </body>
+    <script src="/static/scripts/scripts.js"></script>
 </html>
