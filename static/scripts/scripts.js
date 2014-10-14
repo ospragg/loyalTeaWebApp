@@ -51,7 +51,7 @@ function requestHTML(request) {
 
 // load the cafe table
 function loadCafeTable() {
-    document.write(requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")););
+    document.write(requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")));
     document.close();
 }
 
