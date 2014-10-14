@@ -11,10 +11,11 @@
             <div id = "header">
                 <img src="{{ header_path }}" class="img-responsive">
             </div>
-            <div id = "cafeTable"></div>
+            <div id = "cafeTable">
                 {% for cafe in cafes %}
                 <img src="{{ cafe }}">
                 {% endfor %}
+            </div>
             <br>
 
     	<button onclick="stampRecorded()">Stamp!</button>
