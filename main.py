@@ -10,8 +10,7 @@ class MainHandler(boilerplate.BlogHandler):
     header_path = header_key.get().path
 
     template_values = {
-      "header_path": header_path,
-      "cafes": []
+      "header_path": header_path
     }
     self.response.out.write(template.render("templates/index.html", template_values))
 
@@ -73,10 +72,11 @@ class CafeTableHandler(boilerplate.BlogHandler):
       cafe = cafe_key.get()
       cafe_smalls.append(cafe.small_image)
 
-    template_values = {"cafes": cafe_smalls,
-                       "header_path": "/static/images/header.jpg"}
+    template_values = {
+      "cafes": cafe_smalls
+    }
 
-    self.response.out.write(template.render("templates/index.html", template_values))
+    self.response.out.write(template.render("templates/cafe_table.html", template_values))
 
 class NewUserHandler(boilerplate.BlogHandler):
   def get(self):
