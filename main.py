@@ -1,37 +1,8 @@
 import webapp2
-import json
-import jinja2
-import os
 import boilerplate
-
-import google.appengine.api.images
-import logging
-
-import data
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
-import logging
-
-class ImageModel(ndb.Model):
-  path = ndb.StringProperty()
-
-class UserModel(ndb.Model):
-  cafe_stamps = ndb.JsonProperty()
-
-class CafeModel(ndb.Model):
-  name = ndb.StringProperty()
-  stamp_id = ndb.IntegerProperty()
-  small_image = ndb.StringProperty()
-  stamp_0 = ndb.StringProperty()
-  stamp_1 = ndb.StringProperty()
-  stamp_2 = ndb.StringProperty()
-  stamp_3 = ndb.StringProperty()
-  stamp_4 = ndb.StringProperty()
-  stamp_5 = ndb.StringProperty()
-  stamp_6 = ndb.StringProperty()
-  stamp_7 = ndb.StringProperty()
-  stamp_8 = ndb.StringProperty()
-  stamp_9 = ndb.StringProperty()
+from models.models import ImageModel, UserModel, CafeModel
 
 class MainHandler(boilerplate.BlogHandler):
   def get(self):
