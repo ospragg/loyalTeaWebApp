@@ -70,7 +70,7 @@ class CafeTableHandler(webapp2.RequestHandler):
     for cafe_id in cafe_data.keys():
       cafe_key = ndb.Key(CafeModel, cafe_id)
       cafe = cafe_key.get()
-      cafe_smalls.append(cafe.small_image)
+      cafe_smalls.append((cafe_id, cafe.small_image))
 
     template_values = {
       "cafes": cafe_smalls

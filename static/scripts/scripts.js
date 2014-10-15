@@ -47,8 +47,8 @@ function loadCafeTable() {
     $( "#cafeTable" ).html( requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")) );
 }
 
-function stampRecorded() {
-    $( "img#header" ).attr( "src", requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=217") );
+function stampRecorded(stamp_id) {
+    $( "img#header" ).attr( "src", requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=" + stamp_id) );
     loadCafeTable();
 }
 
@@ -56,6 +56,10 @@ function stampRecorded() {
 function initialise() {
     checkForUUID();
     loadCafeTable();
+}
+
+function go_to_cafe(cafe_id) {
+    stampRecorded(217);
 }
 
 
