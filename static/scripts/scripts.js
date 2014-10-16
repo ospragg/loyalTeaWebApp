@@ -69,7 +69,7 @@ function identifyTouchIndex(touch_event) {
 
     // then save that touch location and incriment n_touch_locations for the next location
     indexed_touch_locs.push(touch_event);
-    
+
     // return the index of the touch
     return indexed_touch_locs.length - 1;
 }
@@ -190,8 +190,9 @@ function initialise() {
     document.getElementById("header").style.width = width + "px";
     //getElementById('header').style.width = width + "px";
     //getElementById('header').style.height = height + "px";
+
     //document.getElementById("cafeTable").style.width = width + "px";
-    //$( "img#header" ).attr( "style", 
+    //$( "img#header" ).attr( "style",
 }
 
 function go_to_cafe(cafe_id) {
