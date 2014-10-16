@@ -6,3 +6,16 @@ html, body {
 .header {
     width: 320px;
 }
+/*
+#header {
+	width: 100vw;
+	height: 100vh
+}
+*/
+#cafe_table {
+	width: 100vw;
+}
+
+.cafe_entry {
+	width: 100%;
+}

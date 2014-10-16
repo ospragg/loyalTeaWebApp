@@ -2,6 +2,7 @@ import webapp2
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 from models.models import ImageModel, UserModel, CafeModel
+import logging
 
 class MainHandler(webapp2.RequestHandler):
   def get(self):
@@ -67,10 +68,23 @@ class CafeTableHandler(webapp2.RequestHandler):
     cafe_data = user_key.get().cafe_stamps
     cafe_smalls = []
 
+    cafe_data_2 = user_key.get()
+
     for cafe_id in cafe_data.keys():
+
+      logging.info("cafe_id = " + str(cafe_id))
+      logging.info("cafe_name = " + str(cafe_data_2.cafe_stamps[cafe_id]))
+
       cafe_key = ndb.Key(CafeModel, cafe_id)
       cafe = cafe_key.get()
-      cafe_smalls.append((cafe_id, cafe.small_image))
+
+      if hasattr(cafe, 'name'):
+        cafe_smalls.append((cafe_id, "/static/images/Cafe_data/" + cafe.name + "/c" + str(cafe_data_2.cafe_stamps[cafe_id]) + ".jpg"))
+      #cafe_smalls.append((cafe_id, "/static/images/Cafe_data/Wendels/" + "6" + "_cell.jpg"))
+      #cafe_smalls.append((cafe_id, "/static/images/Cafe_data/Wendels/3_cell.jpg"))
+      #cafe_smalls.append("/static/images/Cafe_data/3_cell.jpg")
+      #cafe_smalls.append("/static/images/header.jpg")
+      #cafe_smalls.append((cafe_id, cafe.small_image))
 
     template_values = {
       "cafes": cafe_smalls
@@ -90,13 +104,14 @@ class FirstTimeHandler(webapp2.RequestHandler):
   def get(self):
     header_entitity = ImageModel(id="header", path="/static/images/header.jpg")
     header_entitity.put()
-    self.register_cafe("dose_espresso")
+    self.register_cafe("Wendels")
+    #self.register_cafe("dose_espresso")
 
   def register_cafe(self, cafe_name):
     cafe_entity = CafeModel(
-      id="217",
+      id="136",
       name = cafe_name,
-      small_image = self.cafe_image_path(cafe_name, "0_cell"),
+      small_image = self.cafe_image_path(cafe_name, "4_cell"),
       stamp_0 = self.cafe_image_path(cafe_name, "0"),
       stamp_1 = self.cafe_image_path(cafe_name, "1"),
       stamp_2 = self.cafe_image_path(cafe_name, "2"),
@@ -107,6 +122,7 @@ class FirstTimeHandler(webapp2.RequestHandler):
       stamp_7 = self.cafe_image_path(cafe_name, "7"),
       stamp_8 = self.cafe_image_path(cafe_name, "8"),
       stamp_9 = self.cafe_image_path(cafe_name, "9"),
+      stamp_id = 136,
       )
     cafe_entity.put()
 
