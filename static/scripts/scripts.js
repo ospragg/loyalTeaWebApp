@@ -109,7 +109,7 @@ function touchStarted(event) {
             }
             stampID = convertFromPacketToDecimal(data_array);
 
-            stampRecorded(stampID);
+            stampRecorded(stampID, 1);
 
         } else {
             stampID = 0;
@@ -186,10 +186,10 @@ function initialise() {
     
     var height = window.innerHeight;
     var width = window.innerWidth;
-    //header.style.height = height + "px";
-    //header.style.width = width + "px";
-    getElementById('header').style.width = width + "px";
-    getElementById('header').style.height = height + "px";
+    document.getElementById("header").style.height = height + "px";
+    document.getElementById("header").style.width = width + "px";
+    //getElementById('header').style.width = width + "px";
+    //getElementById('header').style.height = height + "px";
     //document.getElementById("cafeTable").style.width = width + "px";
     //$( "img#header" ).attr( "style", 
 }
