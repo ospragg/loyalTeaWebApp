@@ -139,14 +139,14 @@ function generateUUID() {
 // check if a UUID for the browser has beem created, and create one if it hasn't
 function checkForUUID() {
     if (localStorage.getItem("UUID") == null) {
-        debug.innerHTML = "No data saved";
+        //debug.innerHTML = "No data saved";
         var uuid = generateUUID();
         localStorage.setItem("UUID", uuid);
 
         //send that to the server and register them as a new user
         requestHTML("/new_user?uuid=" + uuid);
     } else {
-        debug.innerHTML = localStorage.getItem("UUID");
+        //debug.innerHTML = localStorage.getItem("UUID");
     }
 }
 
@@ -196,7 +196,7 @@ function initialise() {
 }
 
 function go_to_cafe(cafe_id) {
-    stampRecorded(217, 0);
+    stampRecorded(cafe_id, 0);
 }
 
 
