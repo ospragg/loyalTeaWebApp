@@ -172,8 +172,8 @@ function loadCafeTable() {
     $( "#cafeTable" ).html( requestHTML("/cafe_table?uuid=" + localStorage.getItem("UUID")) );
 }
 
-function stampRecorded(stamp_id) {
-    $( "img#header" ).attr( "src", requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=" + stamp_id) );
+function stampRecorded(stamp_id, stamp) {
+    $( "img#header" ).attr( "src", requestHTML("/record_stamp?uuid=" + localStorage.getItem("UUID") + "&stamp_id=" + stamp_id + "&stamp=" + stamp) );
     loadCafeTable();
 
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -183,7 +183,6 @@ function stampRecorded(stamp_id) {
 function initialise() {
     checkForUUID();
     loadCafeTable();
-
     
     var height = window.innerHeight;
     var width = window.innerWidth;
@@ -193,7 +192,10 @@ function initialise() {
     getElementById('header').style.height = height + "px";
     //document.getElementById("cafeTable").style.width = width + "px";
     //$( "img#header" ).attr( "style", 
+}
 
+function go_to_cafe(cafe_id) {
+    stampRecorded(217, 0);
 }
 
 

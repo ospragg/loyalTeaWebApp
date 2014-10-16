@@ -18,17 +18,20 @@ class StampHandler(webapp2.RequestHandler):
   def get(self):
     uuid = self.request.get('uuid')
     stamp_id = self.request.get('stamp_id')
+    record_stamp = int(self.request.get('stamp'))
     user_key = ndb.Key(UserModel, uuid)
     cafe_data = user_key.get()
-    if cafe_data.cafe_stamps.get(stamp_id, None) is not None:
-      cafe_data.cafe_stamps[stamp_id] += 1
-    else:
-      cafe_data.cafe_stamps[stamp_id] = 1
 
-    if cafe_data.cafe_stamps[stamp_id] > 9:
-      cafe_data.cafe_stamps[stamp_id] = 0
+    if record_stamp:
+      if cafe_data.cafe_stamps.get(stamp_id, None) is not None:
+        cafe_data.cafe_stamps[stamp_id] += 1
+      else:
+        cafe_data.cafe_stamps[stamp_id] = 1
 
-    cafe_data.put()
+      if cafe_data.cafe_stamps[stamp_id] > 9:
+        cafe_data.cafe_stamps[stamp_id] = 0
+
+      cafe_data.put()
 
     num_of_stamps = cafe_data.cafe_stamps[stamp_id]
 
